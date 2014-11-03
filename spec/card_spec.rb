@@ -1,87 +1,81 @@
 require 'spec_helper'
 
-describe BlackJack::Card do
-  let(:card) { BlackJack::Card.new(suit, face) }
-  let(:suit) { :heart }
-  let(:face) { 'J' }
+describe 'Playing cards (in Blackjack)' do
 
-  describe 'initialized values' do
-    it "reports them publicly" do
-      expect(card.suit).to be == suit
-      expect(card.face).to be == face
+  describe 'initializing a playing card' do
+    it 'returns its given suit and face' do
+      card = BlackJack::Card.new(:heart, 'J')
+
+      expect(card.suit).to be == :heart
+      expect(card.face).to be == 'J'
     end
   end
 
-  xdescribe '#values' do
-    context 'when the face is a number' do
-      let(:face) { '6' }
+  describe '#values' do
+    xit 'returns the values of a card when it is a number' do
+      card = BlackJack::Card.new(:heart, '6')
 
-      it "returns that number in an array" do
-        expect(card.values).to be == [6]
-      end
+      expect(card.values).to be == [6]
     end
 
-    context 'when face is an ace' do
-      let(:face) { 'A' }
+    xit 'returns the values of a card when it is a different number' do
+      card = BlackJack::Card.new(:heart, '8')
 
-      it "returns both 11 and 1" do
-        expect(card.values).to be == [1, 11]
-      end
+      expect(card.values).to be == [8]
     end
 
-    context 'when the face is another court card' do
-      context "when 'J'" do
-        let(:face) { 'J' }
+    xit 'returns the values of a card when it is an Ace' do
+      card = BlackJack::Card.new(:heart, 'A')
 
-        it "should be an array with only 10" do
-          expect(card.values).to be == [10]
-        end
-      end
+      expect(card.values).to be == [1, 11]
+    end
 
-      context "when 'Q'" do
-        let(:face) { 'Q' }
+    xit 'returns the values of a card when it is a Queen' do
+      card = BlackJack::Card.new(:heart, 'Q')
 
-        it "should be an array with only 10" do
-          expect(card.values).to be == [10]
-        end
-      end
+      expect(card.values).to be == [10]
+    end
 
-      context "when 'K'" do
-        let(:face) { 'Q' }
+    xit 'returns the values of a card when it is a King' do
+      card = BlackJack::Card.new(:heart, 'K')
 
-        it "should be an array with only 10" do
-          expect(card.values).to be == [10]
-        end
-      end
+      expect(card.values).to be == [10]
+    end
+
+    xit 'returns the values of a card when it is a Jack' do
+      card = BlackJack::Card.new(:heart, 'J')
+
+      expect(card.values).to be == [10]
     end
   end
 
-  xdescribe '#==' do
-    context "when two cards have different values and suits" do
-      let(:card_1) { BlackJack::Card.new(suit, '3') }
-      let(:card_2) { BlackJack::Card.new(suit, '2') }
+  describe '#==' do
+    xit 'returns true when two cards have the same face and suit' do
+      card_1 = BlackJack::Card.new(:heart, 'K')
+      card_2 = BlackJack::Card.new(:heart, 'K')
 
-      it "should not be ==" do
-        expect(card_1 == card_2).to be false
-      end
+      expect(card_1 == card_2).to be true
     end
 
-    context "when two cards have the same value, but different suits" do
-      let(:card_1) { BlackJack::Card.new(:heart, face) }
-      let(:card_2) { BlackJack::Card.new(:spade, face) }
+    xit "returns false when two cards have different faces and different suits" do
+      card_1 = BlackJack::Card.new(:heart, '3')
+      card_1 = BlackJack::Card.new(:diamond, '2')
 
-      it "should not be ==" do
-        expect(card_1 == card_2).to be false
-      end
+      expect(card_1 == card_2).to be false
     end
 
-    context "when two cards have same suits, but different values" do
-      let(:card_1) { BlackJack::Card.new(suit, face) }
-      let(:card_2) { BlackJack::Card.new(suit, face) }
+    xit "returns false when two cards have the same face but different suits" do
+      card_1 = BlackJack::Card.new(:heart, '3')
+      card_1 = BlackJack::Card.new(:diamond, '3')
 
-      it "should not be ==" do
-        expect(card_1 == card_2).to be true
-      end
+      expect(card_1 == card_2).to be false
+    end
+
+    xit "returns false when two cards have different faces but the same suit" do
+      card_1 = BlackJack::Card.new(:heart, '3')
+      card_1 = BlackJack::Card.new(:heart, '2')
+
+      expect(card_1 == card_2).to be false
     end
   end
 end
