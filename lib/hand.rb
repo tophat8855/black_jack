@@ -26,16 +26,11 @@ module BlackJack
         elsif @hand.size == 2
           if @hand[0].face == @hand[1].face
             @values = [2, 12, 22]
-          #else
-            #@hand.each do |card|
-
-              ######### THIS IS WHERE MY MESS IS ################
-            #  if card.values.length = 1
-            #    int = card.values.
-            #  end
-            #  @values = [1 + int, 11 + int]
-          #  end
+          else value_array.sort!
+            int = value_array[1].join.to_i
+            @values = [1 + int, 11 + int]
           end
+
         end
       else
         @hand.each do |card|

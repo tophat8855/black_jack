@@ -92,12 +92,12 @@ describe BlackJack::Hand do
           hand.add(BlackJack::Card.new(:diamond, '5'))
           expect(hand.values.length).to be == 2
         end
-        xit "includes a value that is 1 more than the non-ace card value" do
+        it "includes a value that is 1 more than the non-ace card value" do
           hand.add(BlackJack::Card.new(:heart, 'A'))
           hand.add(BlackJack::Card.new(:diamond, '5'))
           expect(hand.values).to include(6)
         end
-        xit "includes a value that is 11 more than the non-ace card value" do
+        it "includes a value that is 11 more than the non-ace card value" do
           hand.add(BlackJack::Card.new(:heart, 'A'))
           hand.add(BlackJack::Card.new(:diamond, '5'))
           expect(hand.values).to include(16)
