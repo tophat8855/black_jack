@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe BlackJack::Hand do
-  before do
-    pending("do this spec after Deck is complete")
-  end
 
   let(:hand) { BlackJack::Hand.new }
 
@@ -32,32 +29,79 @@ describe BlackJack::Hand do
 
     context 'when only one card' do
       context 'when it is a non-ace card' do
-        it "is an array of size 1"
-        it "includes the value of the card"
+        it "is an array of size 1" do
+          hand.add(BlackJack::Card.new(:heart, 'Q'))
+          expect(hand.values.length).to be == 1
+        end
+        it "includes the value of the card" do
+          hand.add(BlackJack::Card.new(:heart, 'Q'))
+          expect(hand.values).to be == [10]
+        end
       end
 
       context 'when it is an ace' do
-        it "is the same as the card.values"
+        it "is the same as the card.values" do
+          card = BlackJack::Card.new(:heart, 'A')
+          hand.add(card)
+          expect(hand.values).to be == card.values
+        end
+
       end
     end
 
     context 'when two cards' do
       context 'when neither is an ace' do
-        it "is an array with length 1"
-        it "includes the sum of the two card values"
+        it "is an array with length 1" do
+          hand.add(BlackJack::Card.new(:heart, '3'))
+          hand.add(BlackJack::Card.new(:heart, '4'))
+          expect(hand.values.length).to be == 1
+        end
+        it "includes the sum of the two card values" do
+          hand.add(BlackJack::Card.new(:heart, '3'))
+          hand.add(BlackJack::Card.new(:heart, '4'))
+          expect(hand.values).to be == [7]
+        end
       end
 
       context 'when both are aces' do
-        it "is an array with length 3"
-        it "includes 2"
-        it "includes 12"
-        it "includes 22"
+        it "is an array with length 3" do
+          hand.add(BlackJack::Card.new(:heart, 'A'))
+          hand.add(BlackJack::Card.new(:diamond, 'A'))
+          expect(hand.values.length).to be == 3
+        end
+        it "includes 2" do
+          hand.add(BlackJack::Card.new(:heart, 'A'))
+          hand.add(BlackJack::Card.new(:diamond, 'A'))
+          expect(hand.values).to include(2)
+        end
+        it "includes 12" do
+          hand.add(BlackJack::Card.new(:heart, 'A'))
+          hand.add(BlackJack::Card.new(:diamond, 'A'))
+          expect(hand.values).to include(12)
+        end
+        it "includes 22"do
+          hand.add(BlackJack::Card.new(:heart, 'A'))
+          hand.add(BlackJack::Card.new(:diamond, 'A'))
+          expect(hand.values).to include(22)
+        end
       end
 
       context 'when only one is an ace' do
-        it "is an array of length two"
-        it "includes a value that is 1 more than the non-ace card value"
-        it "includes a value that is 11 more than the non-ace card value"
+        it "is an array of length two" do
+          hand.add(BlackJack::Card.new(:heart, 'A'))
+          hand.add(BlackJack::Card.new(:diamond, '5'))
+          expect(hand.values.length).to be == 2
+        end
+        xit "includes a value that is 1 more than the non-ace card value" do
+          hand.add(BlackJack::Card.new(:heart, 'A'))
+          hand.add(BlackJack::Card.new(:diamond, '5'))
+          expect(hand.values).to include(6)
+        end
+        xit "includes a value that is 11 more than the non-ace card value" do
+          hand.add(BlackJack::Card.new(:heart, 'A'))
+          hand.add(BlackJack::Card.new(:diamond, '5'))
+          expect(hand.values).to include(16)
+        end
       end
     end
 
